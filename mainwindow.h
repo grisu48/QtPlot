@@ -4,8 +4,10 @@
 #include <QMainWindow>
 #include <QVector>
 #include <QList>
+#include <QFileDialog>
 
 #include "plot.h"
+#include "fileparser.h"
 
 namespace Ui {
 class MainWindow;
@@ -36,6 +38,8 @@ private slots:
     void on_actionRescale_triggered();
 
     void on_actionStatusbar_toggled(bool arg1);
+
+    void on_actionOpenFile_triggered();
 
 private:
     Ui::MainWindow *ui;

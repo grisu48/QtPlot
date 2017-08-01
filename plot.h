@@ -3,6 +3,9 @@
 
 #include <QVector>
 #include <QString>
+#include <QPen>
+#include <QColor>
+
 
 /**
  * @brief A single plot
@@ -14,6 +17,9 @@ private:
     QVector<double> x_values;
     /** Y coordinates */
     QVector<double> y_values;
+
+    /** Indicating if the plot is enabled or not */
+    bool enabled = true;
 public:
     Plot();
     Plot(const Plot &plot);
@@ -31,6 +37,9 @@ public:
      * @return y values
      */
     QVector<double> y(void) const;
+
+    /** Pen for this plot */
+    QPen pen;
 
     /**
      * @brief Adds a given point
@@ -53,6 +62,11 @@ public:
     size_t size(void) const;
 
     /**
+     * @brief clear Clears the current plot
+     */
+    void clear(void);
+
+    /**
      * @brief remove Removes the point with the given index
      * @param index Index of the point to be removed
      * @return true if the element is removed, false if the index is out of bounds
@@ -60,6 +74,9 @@ public:
     bool remove(const size_t index);
 
     size_t readFile(void);
+
+    void setEnabled(const bool enabled) { this->enabled = enabled; }
+    bool isEnabled(void) const { return this->enabled; }
 };
 
 #endif // PLOT_H

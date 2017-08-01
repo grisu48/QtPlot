@@ -20,11 +20,13 @@ void MainWindow::replot(void) {
     const size_t l = this->plots.size();
     for(size_t i = 0; i<l; i++) {
         Plot &plot = this->plots[i];
+        if(!plot.isEnabled()) continue;
+
         QCPGraph *graph = ui->plPlot->addGraph();
 
-        QVector<double> x = plot.x();
-        QVector<double> y = plot.y();
-        graph->setData(x, y);
+        graph->setData(plot.x(), plot.y());
+        graph->setAntialiased(true);
+        graph->setPen(plot.pen);
     }
 
     ui->plPlot->rescaleAxes();
@@ -48,4 +50,17 @@ void MainWindow::on_actionRescale_triggered()
 void MainWindow::on_actionStatusbar_toggled(bool toggled)
 {
     ui->fraStatus->setVisible(toggled);
+}
+
+void MainWindow::on_actionOpenFile_triggered()
+{
+    QString filter = tr("CSV file (*.csv);;All files (*.*)");
+    QString filename = QFileDialog::getOpenFileName(this, "Open file", "", filter);
+    if(filename.isEmpty()) return;
+
+    FileParser parser;
+    parser.readFile(filename);
+    // Right now we don't check the parser for it's status
+    this->addPlot(parser.getPlot());
+    this->replot();
 }

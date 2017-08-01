@@ -4,15 +4,17 @@
 
 Plot::Plot()
 {
-
+    this->pen = QPen();
 }
 
 
-Plot::Plot(const Plot &plot) {
-    this->add(plot.x_values, plot.y_values);
+Plot::Plot(const Plot &plot) : Plot() {
+    const size_t l = plot.size();
+    for(size_t i=0;i<l;i++)
+        this->add(plot.x_values[i], plot.y_values[i]);
 }
 
-Plot::Plot(const QVector<double> &x, const QVector<double> &y) {
+Plot::Plot(const QVector<double> &x, const QVector<double> &y) : Plot() {
     this->add(x,y);
 }
 
@@ -53,4 +55,9 @@ bool Plot::remove(const size_t index) {
         this->y_values.remove(index);
         return true;
     }
+}
+
+void Plot::clear(void) {
+    this->x_values.clear();
+    this->y_values.clear();
 }
