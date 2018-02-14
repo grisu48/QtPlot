@@ -54,13 +54,15 @@ void MainWindow::on_actionStatusbar_toggled(bool toggled)
 
 void MainWindow::on_actionOpenFile_triggered()
 {
-    QString filter = tr("CSV file (*.csv);;All files (*.*)");
+    QString filter = tr("Supported files (*.csv *.dat);;CSV file (*.csv);;Dat file (*.dat);;All files (*.*)");
     QString filename = QFileDialog::getOpenFileName(this, "Open file", "", filter);
     if(filename.isEmpty()) return;
 
     FileParser parser;
     parser.readFile(filename);
     // Right now we don't check the parser for it's status
-    this->addPlot(parser.getPlot());
+    QList<Plot> plots = parser.getPlots();
+    foreach(Plot plot, plots)
+        this->addPlot(plot);
     this->replot();
 }

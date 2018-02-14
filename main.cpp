@@ -117,7 +117,10 @@ int main(int argc, char *argv[])
             } else {
                 QString filename = arg;
                 parser.readFile(filename);
-                w.addPlot(parser.getPlot());
+
+                QList<Plot> plots = parser.getPlots();
+                foreach(Plot plot, plots)
+                    w.addPlot(plot);
             }
         }
     } catch (const char* msg) {

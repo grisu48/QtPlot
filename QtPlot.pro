@@ -6,6 +6,8 @@
 
 QT       += core gui printsupport
 
+CONFIG += c++11
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = QtPlot
@@ -24,3 +26,6 @@ HEADERS  += mainwindow.h \
     fileparser.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    resources.qrc

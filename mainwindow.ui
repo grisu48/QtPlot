@@ -52,7 +52,7 @@
      <x>0</x>
      <y>0</y>
      <width>586</width>
-     <height>23</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuPlot">
@@ -89,9 +89,15 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionOpenFile"/>
+   <addaction name="actionSavePlot"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionOpenFile">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/open.png</normaloff>:/icons/open.png</iconset>
+   </property>
    <property name="text">
     <string>Open file ...</string>
    </property>
@@ -100,6 +106,10 @@
    </property>
   </action>
   <action name="actionSavePlot">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/save.png</normaloff>:/icons/save.png</iconset>
+   </property>
    <property name="text">
     <string>Save plot as ...</string>
    </property>
@@ -146,6 +156,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

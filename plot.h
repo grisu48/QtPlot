@@ -20,6 +20,11 @@ private:
 
     /** Indicating if the plot is enabled or not */
     bool enabled = true;
+
+    /** Determines if the x scale is logarithmic */
+    bool x_log = false;
+    /** Determines if the y scale is logarithmic */
+    bool y_log = false;
 public:
     Plot();
     Plot(const Plot &plot);
@@ -77,6 +82,15 @@ public:
 
     void setEnabled(const bool enabled) { this->enabled = enabled; }
     bool isEnabled(void) const { return this->enabled; }
+
+    /** Set if the x axis should be logarithmic */
+    void xlog(const bool enabled) { this->x_log = enabled; }
+    /** Set if the y axis should be logarithmic */
+    void ylog(const bool enabled) { this->y_log = enabled; }
+    /** @returns true if the x axis is plotted logarithmic */
+    bool xlog(void) const { return this->x_log; }
+    /** @returns true if the y axis is plotted logarithmic */
+    bool ylog(void) const { return this->y_log; }
 };
 
 #endif // PLOT_H
