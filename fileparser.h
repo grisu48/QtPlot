@@ -96,6 +96,7 @@ private:
     long linesRead = 0;
 
     bool ok = true;
+    char sep = ',';     // Separator
 
     /**
      * @brief parseLine This method tries to parse the given line

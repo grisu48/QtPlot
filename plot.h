@@ -25,11 +25,16 @@ private:
     bool x_log = false;
     /** Determines if the y scale is logarithmic */
     bool y_log = false;
+
+    QString _title;
 public:
     Plot();
     Plot(const Plot &plot);
     Plot(const QVector<double> &x, const QVector<double> &y);
     virtual ~Plot();
+
+    void title(const QString &title) { this->_title = title; }
+    QString title(void) const { return this->_title; }
 
     /**
      * @brief get the x values

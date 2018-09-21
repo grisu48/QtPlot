@@ -33,7 +33,7 @@ std::vector<double> FileParser::parseLine(QString line) {
     for(int i=0;i<len;i++) {
         QChar c = line.at(i);
         // Check for valid separators
-        if(c.isSpace() || c == ',') {
+        if(c.isSpace() || c == this->sep) {
             buf = buf.trimmed();
             if(buf.size() > 0) {
                 bool ok = false;

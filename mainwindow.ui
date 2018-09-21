@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>586</width>
-    <height>529</height>
+    <width>852</width>
+    <height>489</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>QtPlot - Simple plotting utility</string>
+   <string>QtPlot</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -33,11 +33,21 @@
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QLabel" name="lblStatus">
          <property name="text">
           <string>Status: Ready</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblPosition">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -51,8 +61,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>586</width>
-     <height>24</height>
+     <width>852</width>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuPlot">
@@ -67,22 +77,43 @@
    </widget>
    <widget class="QMenu" name="menuPlot_2">
     <property name="title">
-     <string>Plot</string>
+     <string>P&amp;lot</string>
     </property>
+    <widget class="QMenu" name="menuX_Axis">
+     <property name="title">
+      <string>&amp;x-Axis</string>
+     </property>
+     <addaction name="actionLinear"/>
+     <addaction name="actionLogaritmic"/>
+    </widget>
+    <widget class="QMenu" name="menuY_Axis">
+     <property name="title">
+      <string>&amp;y-Axis</string>
+     </property>
+     <addaction name="actionLinear_2"/>
+     <addaction name="actionLogarithmic"/>
+    </widget>
     <addaction name="actionRefresh"/>
     <addaction name="actionRescale"/>
+    <addaction name="separator"/>
+    <addaction name="menuX_Axis"/>
+    <addaction name="menuY_Axis"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
-     <string>View</string>
+     <string>&amp;View</string>
     </property>
     <addaction name="actionStatusbar"/>
+    <addaction name="actionDockPlots"/>
    </widget>
    <addaction name="menuPlot"/>
    <addaction name="menuPlot_2"/>
    <addaction name="menuView"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="windowTitle">
+    <string>Toolbar</string>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
@@ -91,15 +122,38 @@
    </attribute>
    <addaction name="actionOpenFile"/>
    <addaction name="actionSavePlot"/>
+   <addaction name="separator"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QDockWidget" name="dockPlots">
+   <property name="windowTitle">
+    <string>Plots</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents">
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <widget class="QListWidget" name="lstPlots">
+       <property name="contextMenuPolicy">
+        <enum>Qt::CustomContextMenu</enum>
+       </property>
+       <property name="acceptDrops">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
   <action name="actionOpenFile">
    <property name="icon">
     <iconset resource="resources.qrc">
      <normaloff>:/icons/open.png</normaloff>:/icons/open.png</iconset>
    </property>
    <property name="text">
-    <string>Open file ...</string>
+    <string>&amp;Open file ...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
@@ -111,7 +165,7 @@
      <normaloff>:/icons/save.png</normaloff>:/icons/save.png</iconset>
    </property>
    <property name="text">
-    <string>Save plot as ...</string>
+    <string>&amp;Save plot as ...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -119,17 +173,20 @@
   </action>
   <action name="actionExit">
    <property name="text">
-    <string>Exit</string>
+    <string>&amp;Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
    </property>
   </action>
   <action name="actionRescale">
    <property name="text">
-    <string>Rescale</string>
+    <string>R&amp;escale</string>
    </property>
   </action>
   <action name="actionRefresh">
    <property name="text">
-    <string>Refresh</string>
+    <string>&amp;Refresh</string>
    </property>
    <property name="shortcut">
     <string>F5</string>
@@ -140,10 +197,41 @@
     <bool>true</bool>
    </property>
    <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Statusbar</string>
+   </property>
+  </action>
+  <action name="actionLinear">
+   <property name="text">
+    <string>&amp;Linear</string>
+   </property>
+  </action>
+  <action name="actionLogaritmic">
+   <property name="text">
+    <string>L&amp;ogaritmic</string>
+   </property>
+  </action>
+  <action name="actionLinear_2">
+   <property name="text">
+    <string>&amp;Linear</string>
+   </property>
+  </action>
+  <action name="actionLogarithmic">
+   <property name="text">
+    <string>L&amp;ogarithmic</string>
+   </property>
+  </action>
+  <action name="actionDockPlots">
+   <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Statusbar</string>
+    <string>&amp;Plots</string>
+   </property>
+   <property name="shortcut">
+    <string>F4</string>
    </property>
   </action>
  </widget>
