@@ -18,14 +18,17 @@ SOURCES += main.cpp\
         mainwindow.cpp \
         qcustomplot.cpp \
     plot.cpp \
-    fileparser.cpp
+    fileparser.cpp \
+    dialogimage.cpp
 
 HEADERS  += mainwindow.h \
         qcustomplot.h \
     plot.h \
-    fileparser.h
+    fileparser.h \
+    dialogimage.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    dialogimage.ui
 
 RESOURCES += \
     resources.qrc

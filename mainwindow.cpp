@@ -77,19 +77,56 @@ void MainWindow::on_actionStatusbar_toggled(bool toggled)
     ui->fraStatus->setVisible(toggled);
 }
 
+/**
+ * @brief mimeType Mime type based on the file ending
+ * @param filename input filename where the mime type is returned
+ * @return -1 if no ending, -2 if not recognised ending, 1 for CSV file, 2 for image
+ */
+static int mimeType(const QString &filename) {
+    int index = filename.lastIndexOf('.');
+    if(index < 0) return -1;       // Not found
+    QString ending = filename.mid(index).toLower();
+    if(ending == ".csv" || ending == ".dat") return 1;
+    else if(ending == ".png" || ending == ".bmp" || ending == ".eps" || ending == ".jpg" || ending == ".jpeg") return 2;
+    else return -2;
+}
+
 void MainWindow::on_actionOpenFile_triggered()
 {
-    QString filter = tr("Supported files (*.csv *.dat);;CSV file (*.csv);;Dat file (*.dat);;All files (*.*)");
+    QString filter = tr("Supported files (*.csv *.dat *.png *.bmp *.jpg *.eps);;CSV file (*.csv *.dat);;Image (*.png *.bmp *.jpg *.eps);;All files (*.*)");
     QString filename = QFileDialog::getOpenFileName(this, "Open file", "", filter);
     if(filename.isEmpty()) return;
 
-    FileParser parser;
-    parser.readFile(filename);
-    // Right now we don't check the parser for it's status
-    QList<Plot> plots = parser.getPlots();
-    foreach(Plot plot, plots)
-        this->addPlot(plot);
-    this->replot();
+    // Match file ending with filter
+    try {
+        const int mime = mimeType(filename);
+
+        switch(mime) {
+        case 2:
+            // Load image
+        {
+            DialogImage *dlg = new DialogImage(filename);
+            dlg->show();
+        }
+
+        default:
+            // Try CSV
+        {
+            FileParser parser;
+            parser.readFile(filename);
+            // XXX: Right now we don't check the parser for it's status
+            QList<Plot> plots = parser.getPlots();
+            foreach(Plot plot, plots)
+                this->addPlot(plot);
+            this->replot();
+        }
+        }   // end switch
+    } catch(const char* msg) {
+        ui->lblStatus->setText("Error: " + QString(msg));
+    } catch(...) {
+        ui->lblStatus->setText("Unknown error occured");
+    }
+
 }
 
 void MainWindow::on_actionDockPlots_toggled(bool checked)

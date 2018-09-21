@@ -9,6 +9,7 @@
 
 #include "plot.h"
 #include "fileparser.h"
+#include "dialogimage.h"
 
 namespace Ui {
 class MainWindow;
